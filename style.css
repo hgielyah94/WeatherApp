@@ -6,16 +6,16 @@ form {
   text-align: right;
 }
 .locationIcon {
-  font-size: 40px;
+  font-size: 50px;
   padding-left: 18px;
+  padding-bottom: 5px;
 }
 h1 {
   color: blue;
 }
-.city {
-  font-weight: 900;
-  font-size: 35px;
-  margin-bottom: 0px;
+#city {
+  font-size: 45px;
+  margin-bottom: 5px;
 }
 .localTime {
   font-size: 22px;
@@ -61,4 +61,9 @@ h3 {
 p {
   padding-top: 10px;
   line-height: 2px;
+}
+.currentLocationLink {
+  display: block;
+  padding-top: 10px;
+  text-align: right;
 }

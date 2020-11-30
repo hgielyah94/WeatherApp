@@ -30,7 +30,6 @@ function formatDate(date) {
   let currentDay = days[date.getDay()];
   let currentMonth = months[date.getMonth()];
   let currentDate = date.getDate();
-  console.log(currentTime.getTimezoneOffset);
 
   let hours = currentTime.getHours();
   let minutes = currentTime.getMinutes();
@@ -85,3 +84,39 @@ function showPosition(position) {
   axios.get(apiUrl).then(showTemperature);
 }
 navigator.geolocation.getCurrentPosition(showPosition);
+
+//form
+function search(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#searchTextInput");
+
+  console.log(searchTextInput.value);
+  let searchCity = document.querySelector("#city");
+  if (searchTextInput.value) {
+    searchCity.innerHTML = `${searchTextInput.value}`;
+  } else {
+    alert("Please enter a city");
+  }
+}
+
+let form = document.querySelector("#searchCity");
+form.addEventListener("submit", search);
+let apiSearchUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchTextInput.value}&appid=0fd53f7affdf277c9962be552ec9b405&units=metric`;
+console.log(apiSearchUrl);
+
+// celsius & fahrenheit
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let newTempFahrenheit = document.querySelector("#mainTemp");
+  newTempFahrenheit.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
+}
+let fahrenheit = document.querySelector("#fahrenheitLink");
+fahrenheit.addEventListener("click", displayFahrenheitTemperature);
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  let newTempCelsius = document.querySelector("#mainTemp");
+  newTempCelsius.innerHTML = Math.round(((newTempFahrenheit - 32) * 5) / 9);
+}
+let celsius = document.querySelector("#celsiusLink");
+celsius.addEventListener("click", displayCelsiusTemperature);
