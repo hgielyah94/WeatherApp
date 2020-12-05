@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Weather App</title>
     <link rel="stylesheet" href="style.css" />
     <link
       id="bootstrap"
@@ -26,7 +26,7 @@
           <h1 class="locationIcon"><i class="fas fa-map-marker-alt"></i></h1>
         </div>
         <div class="col-6">
-          <form id="searchCity">
+          <form id="search-city">
             <input
               type="text"
               class="button"
@@ -36,7 +36,7 @@
             />
             <input type="submit" class="button" value="Search" />
           </form>
-          <h6><a class="currentLocationLink" href="">Use current location</a></h6>
+          <h6><a id="current-location-link" href="">Use current location</a></h6>
         </div>
       </div>
       <div class="container">
@@ -46,29 +46,32 @@
             <h4 class="localTime">Monday 30th November, 18:38 GMT</h4>
           </div>
           <div class="col-4"></div>
+
           <div class="col-12"></div>
+
           <div class="col-2"></div>
           <div class="col-2">
             <h1 class="mainWeatherIcon"><i class="fas fa-cloud-sun"></i></h1>
           </div>
           <div class="col-2">
-            <h1 id="mainTemp">17</h1>
+            <h1 id="main-temp">7</h1>
           </div>
           <div class="col-2">
             <h3>
-              <a class="celsiusLink" href="">℃</a> |
-              <a class="fahrenheitLink" href="">℉</a>
+              <a id="celsius-link" href="#">℃</a> |
+              <a id="fahrenheit-link" href="#">℉</a>
             </h3>
           </div>
           <div class="col-4">
             <h4 id="description">partly cloudy</h4>
             <p id="pressure">Pressure: 84%</p><p id="humidity">Humidity: 30%</p><p id="wind">Wind: 10mph</p>
           </div>
+
           <div class="col-12"></div>
+
           <div class="col-2">
             <h1 class="weekdayWeatherIcon">
-              <i class="fas fa-cloud-showers-heavy"></i>
-            </h1>
+              <i class="fas fa-cloud-showers-heavy"></i></h1>
             <h2><strong>15℃</strong></h2>
             <h5><em>Tuesday</em></h5>
             <h6>01/12</h6>
@@ -106,10 +109,7 @@
             <h6>06/12</h6>
           </div>
           <div class="col-12"></div>
-        </div>
-      </div>
-    </div>
-      <button class="button changeCity">Change City</button>
+      <button class="button" id="change-city">Change City</button>
     </div>
     <script src="script.js"></script>
   </body>
