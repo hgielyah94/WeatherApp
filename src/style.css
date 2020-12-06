@@ -72,3 +72,12 @@ p {
 #fahrenheit-link {
   font-size: 28px;
 }
+footer {
+  padding-top: 30px;
+  display: block;
+  text-align: center;
+}
+#github-link {
+  display: block;
+  text-align: center;
+}
