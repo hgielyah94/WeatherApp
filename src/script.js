@@ -39,7 +39,6 @@ function formatDate(date) {
   }
   let currentMonth = months[date.getMonth()];
   let currentYear = date.getFullYear();
-  console.log(currentTime.getTimezoneOffset);
 
   let hours = currentTime.getHours();
   if (hours < 10) {
@@ -108,24 +107,6 @@ function currentLocation(event) {
 let useCurrentLocation = document.querySelector("#current-location-link");
 useCurrentLocation.addEventListener("click", currentLocation);
 
-//search form
-function searchCity(event) {
-  event.preventDefault();
-  let searchTextInput = document.querySelector("#searchTextInput");
-
-  console.log(searchTextInput.value);
-  let searchCity = document.querySelector("#city");
-  if (searchTextInput.value) {
-    searchCity.innerHTML = `${searchTextInput.value}`;
-  } else {
-    alert("Please enter a city");
-  }
-}
-let form = document.querySelector("#search-city");
-form.addEventListener("submit", searchCity);
-let apiSearchUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchTextInput.value}&appid=0fd53f7affdf277c9962be552ec9b405&units=metric`;
-console.log(apiSearchUrl);
-
 //fahrenheit
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
@@ -150,3 +131,25 @@ function displayCelsiusTemperature(event) {
 }
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+//search form
+function searchCity(event) {
+  event.preventDefault();
+  let searchTextInput = document.querySelector("#searchTextInput");
+
+  console.log(searchTextInput.value);
+  let searchCity = document.querySelector("#city");
+  if (searchTextInput.value) {
+    searchCity.innerHTML = `${searchTextInput.value}`;
+  } else {
+    alert("Please enter a city");
+  }
+  let units = "metric";
+  let apiKey = "0fd53f7affdf277c9962be552ec9b405";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchTextInput.value}&appid=${apiKey}&units=${units}`;
+  console.log(apiUrl);
+
+  axios.get(apiUrl).then(showTemperature);
+}
+let form = document.querySelector("#search-city");
+form.addEventListener("submit", searchCity, showTemperature);

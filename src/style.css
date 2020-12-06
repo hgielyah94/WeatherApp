@@ -1,5 +1,6 @@
 body {
   padding: 50px;
+  padding-left: 0px;
 }
 form {
   position: relative;
@@ -39,7 +40,7 @@ h6 {
   font-size: 100px;
 }
 h3 {
-  font-size: 20px;
+  font-size: 28px;
   text-align: left;
 }
 .col-12 {
@@ -66,4 +67,8 @@ p {
   display: block;
   padding-top: 10px;
   text-align: right;
+}
+#celsius-link,
+#fahrenheit-link {
+  font-size: 28px;
 }
