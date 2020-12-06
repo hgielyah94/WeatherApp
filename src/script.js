@@ -153,3 +153,22 @@ function searchCity(event) {
 }
 let form = document.querySelector("#search-city");
 form.addEventListener("submit", searchCity, showTemperature);
+
+//change city button
+function changeCityButton(event) {
+  let changeCity = prompt("Please enter a city");
+  console.log(changeCity);
+
+  let searchCity = document.querySelector("#city");
+  if (changeCity) {
+    searchCity.innerHTML = `${changeCity}`;
+  } else {
+    alert("Please enter a city");
+  }
+  let units = "metric";
+  let apiKey = "0fd53f7affdf277c9962be552ec9b405";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${changeCity}&appid=${apiKey}&units=${units}`;
+  console.log(apiUrl);
+
+  axios.get(apiUrl).then(showTemperature);
+}
