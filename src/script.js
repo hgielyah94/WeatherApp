@@ -127,6 +127,34 @@ function showTemperature(response) {
   apiUrl = `https://timezone.abstractapi.com/v1/current_time?api_key=${apiKey}&location=${location}`;
   console.log(apiUrl);
   axios.get(apiUrl).then(showTime);
+
+  if (temperature > 10) {
+    let weatherIcon = document.querySelector(".mainWeatherIcon");
+    weatherIcon.innerHTML = `<i class="fas fa-sun"></i>`;
+  } else if (temperature < 0) {
+    let weatherIcon = document.querySelector(".mainWeatherIcon");
+    weatherIcon.innerHTML = `<i class="far fa-snowflake"></i>`;
+  } else {
+    let weatherIcon = document.querySelector(".mainWeatherIcon");
+    weatherIcon.innerHTML = `<i class="fas fa-cloud-sun"></i>`;
+  }
+  if (descriptionWind > 10) {
+    let weatherIcon = document.querySelector(".mainWeatherIcon");
+    weatherIcon.innerHTML = `<i class="fas fa-wind"></i>`;
+  }
+  if (h4.innerHTML === "overcast clouds") {
+    let weatherIcon = document.querySelector(".mainWeatherIcon");
+    weatherIcon.innerHTML = `<i class="fas fa-cloud-sun"></i>`;
+  } else if (h4.innerHTML === "rain") {
+    let weatherIcon = document.querySelector(".mainWeatherIcon");
+    weatherIcon.innerHTML = `<i class="fas fa-cloud-showers-heavy"></i>`;
+  } else if (h4.innerHTML === "clear sky") {
+    let weatherIcon = document.querySelector(".mainWeatherIcon");
+    weatherIcon.innerHTML = `<i class="fas fa-sun"></i>`;
+  } else if (h4.innerHTML === "mist") {
+    let weatherIcon = document.querySelector(".mainWeatherIcon");
+    weatherIcon.innerHTML = `<i class="fas fa-cloud-moon"></i>`;
+  }
 }
 //current location on link click
 function showPosition(position) {
