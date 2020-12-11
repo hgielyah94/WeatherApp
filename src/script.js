@@ -26,18 +26,18 @@ function formatDate(date) {
     "December",
   ];
 
-  let currentDay = days[date.getDay()];
-  let currentDate = date.getDate();
-  if (currentDate === 1 || currentDate === 21 || currentDate === 31) {
-    currentDate = `${currentDate}st`;
-  } else if (currentDate === 2 || currentDate === 22) {
-    currentDate = `${currentDate}nd`;
-  } else if (currentDate === 3 || currentDate === 23) {
-    currentDate = `${currentDate}rd`;
-  } else {
-    currentDate = `${currentDate}th`;
-  }
-  let currentMonth = months[date.getMonth()];
+  //let currentDay = days[date.getDay()];
+  //let currentDate = date.getDate();
+  //if (currentDate === 1 || currentDate === 21 || currentDate === 31) {
+  //  currentDate = `${currentDate}st`;
+  //} else if (currentDate === 2 || currentDate === 22) {
+  //  currentDate = `${currentDate}nd`;
+  //} else if (currentDate === 3 || currentDate === 23) {
+  //  currentDate = `${currentDate}rd`;
+  //} else {
+  //  currentDate = `${currentDate}th`;
+  //}
+  //let currentMonth = months[date.getMonth()];
   let currentYear = date.getFullYear();
 
   let hours = currentTime.getHours();
@@ -49,8 +49,14 @@ function formatDate(date) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
+  let seconds = currentTime.getSeconds();
+  if (seconds < 10) {
+    seconds = `0${minutes}`;
+  }
 
-  let formattedDate = `${currentDay} ${currentDate} ${currentMonth} ${currentYear}, ${hours}:${minutes}`;
+  let formattedDate = `Local time: ${currentYear}-${
+    date.getMonth() + 1
+  }-${date.getDate()} ${hours}:${minutes}:${seconds},<br />Greenwich Mean Time`;
 
   let localTime = document.querySelector(".localTime");
   localTime.innerHTML = formattedDate;
@@ -68,6 +74,26 @@ function formatHours(timestamp) {
 }
 
 //temperature & location heading
+function showTime(response) {
+  console.log(response.data);
+  let dateTime = response.data.datetime;
+  let timezone = response.data.timezone_name;
+  let localTime = document.querySelector(".localTime");
+  localTime.innerHTML = `Local time: ${dateTime},<br />${timezone}`;
+}
+homepageWeather("newcastle,%20GB");
+function homepageWeather(response) {
+  let location = "newcastle,%20GB";
+  console.log(response);
+  let units = "metric";
+  let apiKey = "0fd53f7affdf277c9962be552ec9b405";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=${units}`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(showTemperature);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayForecast);
+}
 function showTemperature(response) {
   console.log(response);
   let location = response.data.name;
@@ -96,6 +122,11 @@ function showTemperature(response) {
   let wind = document.querySelector("#wind");
   let descriptionWind = Math.round(response.data.wind.speed);
   wind.innerHTML = `Wind = ${descriptionWind}mph`;
+
+  apiKey = "80a09bbbf0b0476eb94c1986f95476f6";
+  apiUrl = `https://timezone.abstractapi.com/v1/current_time?api_key=${apiKey}&location=${location}`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(showTime);
 }
 //current location on link click
 function showPosition(position) {
@@ -112,6 +143,7 @@ function showPosition(position) {
   apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayForecast);
 }
+
 function currentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(showPosition);
@@ -152,7 +184,6 @@ function displayForecast(response) {
 
   let forecastElement = document.querySelector("#dayOne");
   forecastElement.innerHTML = `
-  <div class="col-2">
     <h1 class="weekdayWeatherIcon">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
        <h2><strong>${temp}℃</strong></h2>
@@ -163,7 +194,6 @@ function displayForecast(response) {
   forecastElement = document.querySelector("#dayTwo");
   temp = Math.round(response.data.list[1].main.temp);
   forecastElement.innerHTML = `
-  <div class="col-2">
     <h1 class="weekdayWeatherIcon">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
        <h2><strong>${temp}℃</strong></h2>
@@ -174,7 +204,6 @@ function displayForecast(response) {
   forecastElement = document.querySelector("#dayThree");
   temp = Math.round(response.data.list[2].main.temp);
   forecastElement.innerHTML = `
-  <div class="col-2">
     <h1 class="weekdayWeatherIcon">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
        <h2><strong>${temp}℃</strong></h2>
@@ -185,7 +214,6 @@ function displayForecast(response) {
   forecastElement = document.querySelector("#dayFour");
   temp = Math.round(response.data.list[3].main.temp);
   forecastElement.innerHTML = `
-  <div class="col-2">
     <h1 class="weekdayWeatherIcon">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
        <h2><strong>${temp}℃</strong></h2>
@@ -196,7 +224,6 @@ function displayForecast(response) {
   forecastElement = document.querySelector("#dayFive");
   temp = Math.round(response.data.list[4].main.temp);
   forecastElement.innerHTML = `
-  <div class="col-2">
     <h1 class="weekdayWeatherIcon">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
        <h2><strong>${temp}℃</strong></h2>
@@ -207,7 +234,6 @@ function displayForecast(response) {
   forecastElement = document.querySelector("#daySix");
   temp = Math.round(response.data.list[5].main.temp);
   forecastElement.innerHTML = `
-  <div class="col-2">
     <h1 class="weekdayWeatherIcon">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
        <h2><strong>${temp}℃</strong></h2>
@@ -235,6 +261,10 @@ function searchCity(event) {
 
   apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchTextInput.value}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayForecast);
+
+  apiKey = "80a09bbbf0b0476eb94c1986f95476f6";
+  apiUrl = `https://timezone.abstractapi.com/v1/current_time?api_key=${apiKey}&location=${searchTextInput.value}`;
+  axios.get(apiUrl).then(showTime);
 }
 let form = document.querySelector("#search-city");
 form.addEventListener("submit", searchCity, showTemperature);
@@ -258,12 +288,9 @@ function changeCityButton(event) {
 
   apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${changeCity}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayForecast);
-}
 
-//weekly forecast
-function forecast(event) {
-  let units = "metric";
-  let apiKey = "0fd53f7affdf277c9962be552ec9b405";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${changeCityButton}&appid=${apiKey}`;
+  apiKey = "80a09bbbf0b0476eb94c1986f95476f6";
+  apiUrl = `https://timezone.abstractapi.com/v1/current_time?api_key=${apiKey}&location=${changeCity}`;
   console.log(apiUrl);
+  axios.get(apiUrl).then(showTime);
 }
