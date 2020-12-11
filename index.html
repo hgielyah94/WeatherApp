@@ -17,7 +17,10 @@
       src="https://kit.fontawesome.com/2c820ba2d3.js"
       crossorigin="anonymous"
     ></script>
-    <script id="axios" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script
+      id="axios"
+      src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+    ></script>
   </head>
   <body>
     <div class="container">
@@ -36,7 +39,9 @@
             />
             <input type="submit" class="button" value="Search" />
           </form>
-          <h6><a id="current-location-link" href="">Use current location</a></h6>
+          <h6>
+            <a id="current-location-link" href="">Use current location</a>
+          </h6>
         </div>
       </div>
       <div class="container">
@@ -64,55 +69,58 @@
           </div>
           <div class="col-4">
             <h4 id="description">partly cloudy</h4>
-            <p id="pressure">Pressure: 84%</p><p id="humidity">Humidity: 30%</p><p id="wind">Wind: 10mph</p>
+            <p id="pressure">Pressure: 84%</p>
+            <p id="humidity">Humidity: 30%</p>
+            <p id="wind">Wind: 10mph</p>
           </div>
-
           <div class="col-12"></div>
-
-          <div class="col-2">
+          
+          <div class="col-2" id="dayOne">
             <h1 class="weekdayWeatherIcon">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
-            <h2><strong>15℃</strong></h2>
-            <h5><em>Tuesday</em></h5>
-            <h6>01/12</h6>
+            <h2><strong>0℃</strong></h2>
+            <h5>00:00</h5>
           </div>
-          <div class="col-2">
+          <div class="col-2" id="dayTwo">
             <h1 class="weekdayWeatherIcon"><i class="fas fa-sun"></i></h1>
-            <h2><strong>18℃</strong></h2>
-            <h5><em>Wednesday</em></h5>
-            <h6>02/12</h6>
+            <h2><strong>0℃</strong></h2>
+            <h5>00:00</h5>
           </div>
-          <div class="col-2">
+          <div class="col-2" id="dayThree">
             <h1 class="weekdayWeatherIcon"><i class="fas fa-cloud-sun"></i></h1>
-            <h2><strong>17℃</strong></h2>
-            <h5><em>Thursday</em></h5>
-            <h6>03/12</h6>
+            <h2><strong>0℃</strong></h2>
+            <h5>00:00</h5>
           </div>
-          <div class="col-2">
+          <div class="col-2" id="dayFour">
             <h1 class="weekdayWeatherIcon"><i class="fas fa-wind"></i></h1>
-            <h2><strong>14℃</strong></h2>
-            <h5><em>Friday</em></h5>
-            <h6>04/12</h6>
+            <h2><strong>0℃</strong></h2>
+            <h5>00:00</h5>
           </div>
-          <div class="col-2">
+          <div class="col-2" id="dayFive">
             <h1 class="weekdayWeatherIcon"><i class="fas fa-cloud-sun"></i></h1>
-            <h2><strong>19℃</strong></h2>
-            <h5><em>Saturday</em></h5>
-            <h6>05/12</h6>
+            <h2><strong>0℃</strong></h2>
+            <h5>00:00</h5>
           </div>
-          <div class="col-2">
+          <div class="col-2" id="daySix">
             <h1 class="weekdayWeatherIcon">
               <i class="fas fa-cloud-showers-heavy"></i>
             </h1>
-            <h2><strong>13℃</strong></h2>
-            <h5><em>Sunday</em></h5>
-            <h6>06/12</h6>
+            <h2><strong>0℃</strong></h2>
+            <h5>00:00</h5>
           </div>
           <div class="col-12"></div>
-      <button class="button" id="change-city" onclick="changeCityButton()">Change City</button>
+          </div>
+      <button class="button" id="change-city" onclick="changeCityButton()">
+        Change City
+      </button>
     </div>
     <footer>Coded by Hayleigh</footer>
-    <a href="https://github.com/hgielyah94/WeatherApp" id="github-link" target="_blank">GitHub Repository</a>
+    <a
+      href="https://github.com/hgielyah94/WeatherApp"
+      id="github-link"
+      target="_blank"
+      >GitHub Repository</a
+    >
     <script src="src/script.js"></script>
   </body>
 </html>

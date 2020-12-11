@@ -81,3 +81,7 @@ footer {
   display: block;
   text-align: center;
 }
+inner.HTML {
+  margin: 0 auto;
+  text-align: center;
+}

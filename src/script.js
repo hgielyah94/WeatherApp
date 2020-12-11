@@ -58,6 +58,15 @@ function formatDate(date) {
 // call date and time function
 formatDate(currentTime);
 
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  return `${hours}:00`;
+}
+
 //temperature & location heading
 function showTemperature(response) {
   console.log(response);
@@ -99,6 +108,9 @@ function showPosition(position) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   console.log(apiUrl);
   axios.get(apiUrl).then(showTemperature);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayForecast);
 }
 function currentLocation(event) {
   event.preventDefault();
@@ -132,6 +144,77 @@ function displayCelsiusTemperature(event) {
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
+function displayForecast(response) {
+  let forecast = response.data.list[0];
+  console.log(forecast);
+  let temp = Math.round(response.data.list[0].main.temp);
+  console.log(temp);
+
+  let forecastElement = document.querySelector("#dayOne");
+  forecastElement.innerHTML = `
+  <div class="col-2">
+    <h1 class="weekdayWeatherIcon">
+              <i class="fas fa-cloud-showers-heavy"></i></h1>
+       <h2><strong>${temp}℃</strong></h2>
+         <h5>${formatHours(forecast.dt * 1000)}</h5>
+  </div>`;
+
+  forecast = response.data.list[1];
+  forecastElement = document.querySelector("#dayTwo");
+  temp = Math.round(response.data.list[1].main.temp);
+  forecastElement.innerHTML = `
+  <div class="col-2">
+    <h1 class="weekdayWeatherIcon">
+              <i class="fas fa-cloud-showers-heavy"></i></h1>
+       <h2><strong>${temp}℃</strong></h2>
+         <h5>${formatHours(forecast.dt * 1000)}</h5>
+  </div>`;
+
+  forecast = response.data.list[2];
+  forecastElement = document.querySelector("#dayThree");
+  temp = Math.round(response.data.list[2].main.temp);
+  forecastElement.innerHTML = `
+  <div class="col-2">
+    <h1 class="weekdayWeatherIcon">
+              <i class="fas fa-cloud-showers-heavy"></i></h1>
+       <h2><strong>${temp}℃</strong></h2>
+         <h5>${formatHours(forecast.dt * 1000)}</h5>
+  </div>`;
+
+  forecast = response.data.list[3];
+  forecastElement = document.querySelector("#dayFour");
+  temp = Math.round(response.data.list[3].main.temp);
+  forecastElement.innerHTML = `
+  <div class="col-2">
+    <h1 class="weekdayWeatherIcon">
+              <i class="fas fa-cloud-showers-heavy"></i></h1>
+       <h2><strong>${temp}℃</strong></h2>
+         <h5>${formatHours(forecast.dt * 1000)}</h5>
+  </div>`;
+
+  forecast = response.data.list[4];
+  forecastElement = document.querySelector("#dayFive");
+  temp = Math.round(response.data.list[4].main.temp);
+  forecastElement.innerHTML = `
+  <div class="col-2">
+    <h1 class="weekdayWeatherIcon">
+              <i class="fas fa-cloud-showers-heavy"></i></h1>
+       <h2><strong>${temp}℃</strong></h2>
+         <h5>${formatHours(forecast.dt * 1000)}</h5>
+  </div>`;
+
+  forecast = response.data.list[5];
+  forecastElement = document.querySelector("#daySix");
+  temp = Math.round(response.data.list[5].main.temp);
+  forecastElement.innerHTML = `
+  <div class="col-2">
+    <h1 class="weekdayWeatherIcon">
+              <i class="fas fa-cloud-showers-heavy"></i></h1>
+       <h2><strong>${temp}℃</strong></h2>
+         <h5>${formatHours(forecast.dt * 1000)}</h5>
+  </div>`;
+}
+
 //search form
 function searchCity(event) {
   event.preventDefault();
@@ -148,8 +231,10 @@ function searchCity(event) {
   let apiKey = "0fd53f7affdf277c9962be552ec9b405";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchTextInput.value}&appid=${apiKey}&units=${units}`;
   console.log(apiUrl);
-
   axios.get(apiUrl).then(showTemperature);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchTextInput.value}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayForecast);
 }
 let form = document.querySelector("#search-city");
 form.addEventListener("submit", searchCity, showTemperature);
@@ -169,6 +254,16 @@ function changeCityButton(event) {
   let apiKey = "0fd53f7affdf277c9962be552ec9b405";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${changeCity}&appid=${apiKey}&units=${units}`;
   console.log(apiUrl);
-
   axios.get(apiUrl).then(showTemperature);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${changeCity}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
+//weekly forecast
+function forecast(event) {
+  let units = "metric";
+  let apiKey = "0fd53f7affdf277c9962be552ec9b405";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${changeCityButton}&appid=${apiKey}`;
+  console.log(apiUrl);
 }
