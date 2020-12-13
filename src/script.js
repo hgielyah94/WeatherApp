@@ -121,7 +121,7 @@ function showTemperature(response) {
   // wind
   let wind = document.querySelector("#wind");
   let descriptionWind = Math.round(response.data.wind.speed);
-  wind.innerHTML = `Wind = ${descriptionWind}mph`;
+  wind.innerHTML = `Wind = ${descriptionWind}km/h`;
 
   apiKey = "80a09bbbf0b0476eb94c1986f95476f6";
   apiUrl = `https://timezone.abstractapi.com/v1/current_time?api_key=${apiKey}&location=${location}`;
