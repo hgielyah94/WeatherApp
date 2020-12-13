@@ -142,18 +142,32 @@ function showTemperature(response) {
     let weatherIcon = document.querySelector(".mainWeatherIcon");
     weatherIcon.innerHTML = `<i class="fas fa-wind"></i>`;
   }
-  if (h4.innerHTML === "overcast clouds") {
+  if (
+    h4.innerHTML === "overcast clouds" ||
+    h4.innerHTML === "broken clouds" ||
+    h4.innerHTML === "partly cloudy"
+  ) {
     let weatherIcon = document.querySelector(".mainWeatherIcon");
-    weatherIcon.innerHTML = `<i class="fas fa-cloud-sun"></i>`;
-  } else if (h4.innerHTML === "rain") {
+    weatherIcon.innerHTML = `<i class="fas fa-cloud"></i></i>`;
+  } else if (
+    h4.innerHTML === "light rain" ||
+    h4.innerHTML === "moderate rain"
+  ) {
     let weatherIcon = document.querySelector(".mainWeatherIcon");
     weatherIcon.innerHTML = `<i class="fas fa-cloud-showers-heavy"></i>`;
   } else if (h4.innerHTML === "clear sky") {
     let weatherIcon = document.querySelector(".mainWeatherIcon");
     weatherIcon.innerHTML = `<i class="fas fa-sun"></i>`;
-  } else if (h4.innerHTML === "mist") {
+  } else if (
+    h4.innerHTML === "mist" ||
+    h4.innerHTML === "fog" ||
+    h4.innerHTML === "haze"
+  ) {
     let weatherIcon = document.querySelector(".mainWeatherIcon");
     weatherIcon.innerHTML = `<i class="fas fa-cloud-moon"></i>`;
+  } else if (h4.innerHTML === "light shower snow") {
+    let weatherIcon = document.querySelector(".mainWeatherIcon");
+    weatherIcon.innerHTML = `<i class="far fa-snowflake"></i>`;
   }
 }
 //current location on link click
@@ -206,13 +220,10 @@ celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 function displayForecast(response) {
   let forecast = response.data.list[0];
-  console.log(forecast);
-  let temp = Math.round(response.data.list[0].main.temp);
-  console.log(temp);
-
   let forecastElement = document.querySelector("#dayOne");
+  temp = Math.round(response.data.list[0].main.temp);
   forecastElement.innerHTML = `
-    <h1 class="weekdayWeatherIcon">
+    <h1 class="weatherIconOne">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
        <h2><strong>${temp}℃</strong></h2>
          <h5>${formatHours(forecast.dt * 1000)}</h5>
@@ -222,7 +233,7 @@ function displayForecast(response) {
   forecastElement = document.querySelector("#dayTwo");
   temp = Math.round(response.data.list[1].main.temp);
   forecastElement.innerHTML = `
-    <h1 class="weekdayWeatherIcon">
+    <h1 class="weatherIconTwo">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
        <h2><strong>${temp}℃</strong></h2>
          <h5>${formatHours(forecast.dt * 1000)}</h5>
@@ -232,7 +243,7 @@ function displayForecast(response) {
   forecastElement = document.querySelector("#dayThree");
   temp = Math.round(response.data.list[2].main.temp);
   forecastElement.innerHTML = `
-    <h1 class="weekdayWeatherIcon">
+    <h1 class="weatherIconThree">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
        <h2><strong>${temp}℃</strong></h2>
          <h5>${formatHours(forecast.dt * 1000)}</h5>
@@ -242,7 +253,7 @@ function displayForecast(response) {
   forecastElement = document.querySelector("#dayFour");
   temp = Math.round(response.data.list[3].main.temp);
   forecastElement.innerHTML = `
-    <h1 class="weekdayWeatherIcon">
+    <h1 class="weatherIconFour">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
        <h2><strong>${temp}℃</strong></h2>
          <h5>${formatHours(forecast.dt * 1000)}</h5>
@@ -252,7 +263,7 @@ function displayForecast(response) {
   forecastElement = document.querySelector("#dayFive");
   temp = Math.round(response.data.list[4].main.temp);
   forecastElement.innerHTML = `
-    <h1 class="weekdayWeatherIcon">
+    <h1 class="weatherIconFive">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
        <h2><strong>${temp}℃</strong></h2>
          <h5>${formatHours(forecast.dt * 1000)}</h5>
@@ -262,11 +273,129 @@ function displayForecast(response) {
   forecastElement = document.querySelector("#daySix");
   temp = Math.round(response.data.list[5].main.temp);
   forecastElement.innerHTML = `
-    <h1 class="weekdayWeatherIcon">
+    <h1 class="weatherIconSix">
               <i class="fas fa-cloud-showers-heavy"></i></h1>
        <h2><strong>${temp}℃</strong></h2>
          <h5>${formatHours(forecast.dt * 1000)}</h5>
   </div>`;
+
+  let days = {
+    dayOne: response.data.list[0].weather[0].main,
+    dayTwo: response.data.list[1].weather[0].main,
+    dayThree: response.data.list[2].weather[0].main,
+    dayFour: response.data.list[3].weather[0].main,
+    dayFive: response.data.list[4].weather[0].main,
+    daySix: response.data.list[5].weather[0].main,
+  };
+  console.log(days);
+
+  if (response.data.list[0].weather[0].main === "Rain") {
+    let weatherIcon = document.querySelector(".weatherIconOne");
+    weatherIcon.innerHTML = `<h1 class="weatherIconOne">
+      <i class="fas fa-cloud-showers-heavy"></i></h1>`;
+  } else if (response.data.list[0].weather[0].main === "Clouds") {
+    let weatherIcon = document.querySelector(".weatherIconOne");
+    weatherIcon.innerHTML = `<h1 class="weatherIconOne">
+    <i class="fas fa-cloud"></i></h1>`;
+  } else if (response.data.list[0].weather[0].main === "Clear") {
+    let weatherIcon = document.querySelector(".weatherIconOne");
+    weatherIcon.innerHTML = `<h1 class="weatherIconOne">
+    <i class="fas fa-sun"></i></h1>`;
+  } else if (response.data.list[0].weather[0].main === "Snow") {
+    let weatherIcon = document.querySelector(".weatherIconOne");
+    weatherIcon.innerHTML = `<h1 class="weatherIconOne">
+    <i class="far fa-snowflake"></i>`;
+  }
+
+  if (response.data.list[1].weather[0].main === "Rain") {
+    let weatherIcon = document.querySelector(".weatherIconTwo");
+    weatherIcon.innerHTML = `<h1 class="weatherIconTwo">
+      <i class="fas fa-cloud-showers-heavy"></i></h1>`;
+  } else if (response.data.list[1].weather[0].main === "Clouds") {
+    let weatherIcon = document.querySelector(".weatherIconTwo");
+    weatherIcon.innerHTML = `<h1 class="weatherIconTwo">
+    <i class="fas fa-cloud"></i></h1>`;
+  } else if (response.data.list[1].weather[0].main === "Clear") {
+    let weatherIcon = document.querySelector(".weatherIconTwo");
+    weatherIcon.innerHTML = `<h1 class="weatherIconTwo">
+    <i class="fas fa-sun"></i></h1>`;
+  } else if (response.data.list[0].weather[0].main === "Snow") {
+    let weatherIcon = document.querySelector(".weatherIconTwo");
+    weatherIcon.innerHTML = `<h1 class="weatherIconTwo">
+    <i class="far fa-snowflake"></i>`;
+  }
+
+  if (response.data.list[2].weather[0].main === "Rain") {
+    let weatherIcon = document.querySelector(".weatherIconThree");
+    weatherIcon.innerHTML = `<h1 class="weatherIconThree">
+      <i class="fas fa-cloud-showers-heavy"></i></h1>`;
+  } else if (response.data.list[2].weather[0].main === "Clouds") {
+    let weatherIcon = document.querySelector(".weatherIconThree");
+    weatherIcon.innerHTML = `<h1 class="weatherIconThree">
+    <i class="fas fa-cloud"></i></h1>`;
+  } else if (response.data.list[2].weather[0].main === "Clear") {
+    let weatherIcon = document.querySelector(".weatherIconThree");
+    weatherIcon.innerHTML = `<h1 class="weatherIconThree">
+    <i class="fas fa-sun"></i></h1>`;
+  } else if (response.data.list[0].weather[0].main === "Snow") {
+    let weatherIcon = document.querySelector(".weatherIconThree");
+    weatherIcon.innerHTML = `<h1 class="weatherIconThree">
+    <i class="far fa-snowflake"></i>`;
+  }
+
+  if (response.data.list[3].weather[0].main === "Rain") {
+    let weatherIcon = document.querySelector(".weatherIconFour");
+    weatherIcon.innerHTML = `<h1 class="weatherIconFour">
+      <i class="fas fa-cloud-showers-heavy"></i></h1>`;
+  } else if (response.data.list[3].weather[0].main === "Clouds") {
+    let weatherIcon = document.querySelector(".weatherIconFour");
+    weatherIcon.innerHTML = `<h1 class="weatherIconFour">
+    <i class="fas fa-cloud"></i></h1>`;
+  } else if (response.data.list[3].weather[0].main === "Clear") {
+    let weatherIcon = document.querySelector(".weatherIconFour");
+    weatherIcon.innerHTML = `<h1 class="weatherIconFour">
+    <i class="fas fa-sun"></i></h1>`;
+  } else if (response.data.list[0].weather[0].main === "Snow") {
+    let weatherIcon = document.querySelector(".weatherIconFour");
+    weatherIcon.innerHTML = `<h1 class="weatherIconFour">
+    <i class="far fa-snowflake"></i>`;
+  }
+
+  if (response.data.list[4].weather[0].main === "Rain") {
+    let weatherIcon = document.querySelector(".weatherIconFive");
+    weatherIcon.innerHTML = `<h1 class="weatherIconFive">
+      <i class="fas fa-cloud-showers-heavy"></i></h1>`;
+  } else if (response.data.list[4].weather[0].main === "Clouds") {
+    let weatherIcon = document.querySelector(".weatherIconFive");
+    weatherIcon.innerHTML = `<h1 class="weatherIconFive">
+    <i class="fas fa-cloud"></i></h1>`;
+  } else if (response.data.list[4].weather[0].main === "Clear") {
+    let weatherIcon = document.querySelector(".weatherIconFive");
+    weatherIcon.innerHTML = `<h1 class="weatherIconFive">
+    <i class="fas fa-sun"></i></h1>`;
+  } else if (response.data.list[0].weather[0].main === "Snow") {
+    let weatherIcon = document.querySelector(".weatherIconFive");
+    weatherIcon.innerHTML = `<h1 class="weatherIconFive">
+    <i class="far fa-snowflake"></i>`;
+  }
+
+  if (response.data.list[5].weather[0].main === "Rain") {
+    let weatherIcon = document.querySelector(".weatherIconSix");
+    weatherIcon.innerHTML = `<h1 class="weatherIconSix">
+      <i class="fas fa-cloud-showers-heavy"></i></h1>`;
+  } else if (response.data.list[5].weather[0].main === "Clouds") {
+    let weatherIcon = document.querySelector(".weatherIconSix");
+    weatherIcon.innerHTML = `<h1 class="weatherIconSix">
+    <i class="fas fa-cloud"></i></h1>`;
+  } else if (response.data.list[5].weather[0].main === "Clear") {
+    let weatherIcon = document.querySelector(".weatherIconSix");
+    weatherIcon.innerHTML = `<h1 class="weatherIconSix">
+    <i class="fas fa-sun"></i></h1>`;
+  } else if (response.data.list[0].weather[0].main === "Snow") {
+    let weatherIcon = document.querySelector(".weatherIconSix");
+    weatherIcon.innerHTML = `<h1 class="weatherIconSix">
+    <i class="far fa-snowflake"></i>`;
+  }
 }
 
 //search form

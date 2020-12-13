@@ -27,7 +27,12 @@ h5,
 h6 {
   text-align: center;
 }
-.weekdayWeatherIcon {
+.weatherIconOne,
+.weatherIconTwo,
+.weatherIconThree,
+.weatherIconFour,
+.weatherIconFive,
+.weatherIconSix {
   text-align: center;
   font-size: 40px;
 }
