@@ -145,7 +145,8 @@ function showTemperature(response) {
   if (
     h4.innerHTML === "overcast clouds" ||
     h4.innerHTML === "broken clouds" ||
-    h4.innerHTML === "partly cloudy"
+    h4.innerHTML === "partly cloudy" ||
+    h4.innerHTML === "scattered clouds"
   ) {
     let weatherIcon = document.querySelector(".mainWeatherIcon");
     weatherIcon.innerHTML = `<i class="fas fa-cloud"></i></i>`;
